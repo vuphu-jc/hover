@@ -129,6 +129,7 @@ public class InWindowDragger implements Dragger {
     public void deactivate() {
         if (mIsActivated) {
             Log.d(TAG, "Deactivating.");
+            mDragListener = null;
             mDragView.setOnTouchListener(null);
             destroyTouchControlView();
             mIsActivated = false;

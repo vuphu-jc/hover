@@ -268,6 +268,7 @@ class HoverViewStateExpanded extends BaseHoverViewState {
         }
         mDragListeners.clear();
         mDraggers.clear();
+        mSections.clear();
 
         mHasControl = false;
         mHasMenu = false;
@@ -785,6 +786,7 @@ class HoverViewStateExpanded extends BaseHoverViewState {
 
         @Override
         public void onPress(float x, float y) {
+            ViewUtils.scale(mFloatingTab, 0.9f);
         }
 
         @Override
@@ -799,11 +801,13 @@ class HoverViewStateExpanded extends BaseHoverViewState {
 
         @Override
         public void onReleasedAt(float x, float y) {
+            ViewUtils.scale(mFloatingTab, 1f);
             mOwner.onDroppedByUser(mFloatingTab);
         }
 
         @Override
         public void onTap() {
+            ViewUtils.scaleAfter(mFloatingTab, 1f);
             mOwner.onTap(mFloatingTab);
         }
     }

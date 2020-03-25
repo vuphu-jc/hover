@@ -125,6 +125,7 @@ public class InViewDragger implements Dragger {
         if (mIsActivated) {
             Log.d(TAG, "Deactivating.");
             mIsActivated = false;
+            mDragListener = null;
             destroyTouchControlView();
         }
     }
