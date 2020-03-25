@@ -15,6 +15,7 @@
  */
 package io.mattcarroll.hover.view;
 
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.support.annotation.NonNull;
@@ -69,16 +70,14 @@ public class InViewDragger implements Dragger {
                             mOriginalViewPosition.y + dragDeltaY
                     );
 
-                    if (mIsDragging || !isTouchWithinSlopOfOriginalTouch(dragDeltaX, dragDeltaY)) {
-                        if (!mIsDragging) {
-                            // Dragging just started
-                            Log.d(TAG, "MOVE Start Drag.");
-                            mIsDragging = true;
-                            mDragListener.onDragStart(mCurrentViewPosition.x, mCurrentViewPosition.y);
-                        } else {
-                            moveDragViewTo(mCurrentViewPosition);
-                            mDragListener.onDragTo(mCurrentViewPosition.x, mCurrentViewPosition.y);
-                        }
+                    if (!mIsDragging) {
+                        // Dragging just started
+                        Log.d(TAG, "MOVE Start Drag.");
+                        mIsDragging = true;
+                        mDragListener.onDragStart(mCurrentViewPosition.x, mCurrentViewPosition.y);
+                    } else {
+                        moveDragViewTo(mCurrentViewPosition);
+                        mDragListener.onDragTo(mCurrentViewPosition.x, mCurrentViewPosition.y);
                     }
 
                     return true;
@@ -125,6 +124,7 @@ public class InViewDragger implements Dragger {
         if (mIsActivated) {
             Log.d(TAG, "Deactivating.");
             mIsActivated = false;
+            mDragListener = null;
             destroyTouchControlView();
         }
     }
@@ -134,6 +134,7 @@ public class InViewDragger implements Dragger {
         mDragView.setId(R.id.hover_drag_view);
         mDragView.setLayoutParams(new ViewGroup.LayoutParams(mTouchAreaDiameter, mTouchAreaDiameter));
         mDragView.setOnTouchListener(mDragTouchListener);
+        mDragView.setBackgroundColor(Color.RED);
         mContainer.addView(mDragView);
 
         moveDragViewTo(new PointF(dragStartCenterPosition.x, dragStartCenterPosition.y));

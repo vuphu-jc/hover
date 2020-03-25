@@ -70,16 +70,14 @@ public class InWindowDragger implements Dragger {
                             mOriginalViewPosition.y + dragDeltaY
                     );
 
-                    if (mIsDragging || !isTouchWithinSlopOfOriginalTouch(dragDeltaX, dragDeltaY)) {
-                        if (!mIsDragging) {
-                            // Dragging just started
-                            Log.d(TAG, "MOVE Start Drag.");
-                            mIsDragging = true;
-                            mDragListener.onDragStart(mCurrentViewPosition.x, mCurrentViewPosition.y);
-                        } else {
-                            moveDragViewTo(mCurrentViewPosition);
-                            mDragListener.onDragTo(mCurrentViewPosition.x, mCurrentViewPosition.y);
-                        }
+                    if (!mIsDragging) {
+                        // Dragging just started
+                        Log.d(TAG, "MOVE Start Drag.");
+                        mIsDragging = true;
+                        mDragListener.onDragStart(mCurrentViewPosition.x, mCurrentViewPosition.y);
+                    } else {
+                        moveDragViewTo(mCurrentViewPosition);
+                        mDragListener.onDragTo(mCurrentViewPosition.x, mCurrentViewPosition.y);
                     }
 
                     return true;
@@ -129,6 +127,7 @@ public class InWindowDragger implements Dragger {
     public void deactivate() {
         if (mIsActivated) {
             Log.d(TAG, "Deactivating.");
+            mDragListener = null;
             mDragView.setOnTouchListener(null);
             destroyTouchControlView();
             mIsActivated = false;
@@ -144,7 +143,7 @@ public class InWindowDragger implements Dragger {
     private void createTouchControlView(@NonNull final Point dragStartCenterPosition) {
         // TODO: define dimen size
         mDragView = new View(mContext);
-        mWindowViewController.addView(mTouchAreaDiameter, mTouchAreaDiameter, true, mDragView);
+        mWindowViewController.addViewDragger(mTouchAreaDiameter, mTouchAreaDiameter, true, mDragView);
         mWindowViewController.moveViewTo(mDragView, dragStartCenterPosition.x - (mTouchAreaDiameter / 2), dragStartCenterPosition.y - (mTouchAreaDiameter / 2));
         mDragView.setOnTouchListener(mDragTouchListener);
 
