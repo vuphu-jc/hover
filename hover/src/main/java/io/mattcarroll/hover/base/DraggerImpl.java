@@ -107,6 +107,11 @@ public abstract class DraggerImpl implements Dragger {
             getDragView().setOnTouchListener(null);
             destroyTouchControlView();
             mIsActivated = false;
+
+            if (mXFling != null)
+                mXFling.cancel();
+            if (mYFling != null)
+                mYFling.cancel();
         }
     }
 
