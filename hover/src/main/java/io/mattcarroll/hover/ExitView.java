@@ -173,6 +173,8 @@ class ExitView extends RelativeLayout {
     public void releaseExit() {
         retrieveExitIcon();
         setVisibility(GONE);
+        ViewUtils.scale(mExitIcon, 1f);
+        mExitIcon.unhighlight();
         if (mAnimationViewWrapper != null) {
             mAnimationViewWrapper.onDestroy();
         }

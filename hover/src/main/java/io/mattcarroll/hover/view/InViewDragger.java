@@ -77,6 +77,7 @@ public class InViewDragger extends DraggerImpl {
 
     @Override
     protected void moveDragViewTo(PointF centerPosition) {
+        if (mDragView == null) return;
         PointF cornerPosition = convertCenterToCorner(centerPosition);
         mDragView.setX(cornerPosition.x);
         mDragView.setY(cornerPosition.y);

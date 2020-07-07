@@ -638,11 +638,12 @@ class HoverViewStateExpanded extends BaseHoverViewState {
                 mHoverView.mOnExitListener.onExit();
             }
             mIsDocked = true;
+
         } else {
             ViewUtils.fadeIn(mHoverView.mScreen.getContentDisplay());
             sendToDock(floatingTab);
+            mHoverView.mScreen.getExitView().releaseExit(null);
         }
-        mHoverView.mScreen.getExitView().releaseExit(null);
     }
 
     private void onTap(FloatingTab floatingTab) {
@@ -690,24 +691,29 @@ class HoverViewStateExpanded extends BaseHoverViewState {
                 exitView.bringExitIconToFront((ViewGroup) floatingTab.getParent());
                 floatingTab.moveTo(exitView.getExitViewPosition());
 
-                //mDraggers.get(floatingTab).brakeIfFling();
+                mDraggers.get(floatingTab).brakeIfFling();
             }
         } else {
             mIsInExitView = false;
             floatingTab.moveTo(position);
         }
 
-        if (!isTouchWithinSlopOfOriginalTouch && mIsDocked) {
-            mIsDocked = false;
-            if (mHoverView.mSelectedSectionId.equals(mSections.get(floatingTab).getId())) {
-                ViewUtils.fadeOut(mHoverView.mScreen.getContentDisplay());
-            }
+        try {
+            if (!isTouchWithinSlopOfOriginalTouch && mIsDocked) {
+                mIsDocked = false;
+                if (mHoverView.mSelectedSectionId.equals(mSections.get(floatingTab).getId())) {
+                    ViewUtils.fadeOut(mHoverView.mScreen.getContentDisplay());
+                }
 
-            for (FloatingTab otherTab : mChainedTabs) {
-                if (otherTab != floatingTab) {
-                    deactivateDragger(otherTab);
+                for (FloatingTab otherTab : mChainedTabs) {
+                    if (otherTab != floatingTab) {
+                        deactivateDragger(otherTab);
+                    }
                 }
             }
+        } catch (Exception e) {
+            // No-op
+            Log.d("hover-exception", e.getMessage());
         }
     }
 
