@@ -239,10 +239,10 @@ class FloatingTab extends FrameLayout {
         Log.d(TAG, "Docking to destination point: " + destinationCornerPosition);
 
         ObjectAnimator xAnimation = ObjectAnimator.ofFloat(this, "x", destinationCornerPosition.x);
-        xAnimation.setDuration(350);
+        xAnimation.setDuration(400);
         xAnimation.setInterpolator(new OvershootInterpolator());
         ObjectAnimator yAnimation = ObjectAnimator.ofFloat(this, "y", destinationCornerPosition.y);
-        yAnimation.setDuration(350);
+        yAnimation.setDuration(400);
         yAnimation.setInterpolator(new OvershootInterpolator());
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.playTogether(xAnimation, yAnimation);

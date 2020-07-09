@@ -279,13 +279,12 @@ public abstract class DraggerImpl implements Dragger {
         }
     }
 
-
     private void startXAnimation() {
         mXFling = createAnimation(mX, mXVelocity, -100, mScreenWidth + 100);
         mXFling.addUpdateListener(mXAnimationUpdate);
         mXFling.addEndListener(new DynamicAnimation.OnAnimationEndListener() {
             @Override
-            public void onAnimationEnd(DynamicAnimation animation, boolean canceled, float value, float velocity) {
+            public void onAnimationEnd(DynamicAnimation dynamicAnimation, boolean b, float v, float v1) {
                 stopAllAnimations();
             }
         });
