@@ -255,6 +255,7 @@ class HoverViewStateCollapsed extends BaseHoverViewState {
                 for (int i = position; i < position + count; i++) {
                     HoverMenu.Section section = mHoverView.mMenu.getSection(i);
                     FloatingTab floatingTab = mHoverView.mScreen.createChainedTab(section.getId(), section.getTabView());
+
                     mChainedTabs.add(floatingTab);
 
                     SpringViewWrapper viewWrapper = new SpringViewWrapper(floatingTab);
@@ -332,13 +333,12 @@ class HoverViewStateCollapsed extends BaseHoverViewState {
         mSelectedSection = null != mSelectedSection ? mSelectedSection : mHoverView.mMenu.getSection(0);
         mSelectedSectionIndex = mHoverView.mMenu.getSectionIndex(mSelectedSection);
 
-        mChainedTabs.add(mFloatingTab);
         mFloatingTab = mHoverView.mScreen.createChainedTab(mSelectedSection.getId(), mSelectedSection.getTabView());
-        mChainedTabs.remove(mFloatingTab);
 
         mFloatingTab.addOnLayoutChangeListener(mOnLayoutChangeListener);
         mFloatingTab.addOnPositionChangeListener(mOnPositionChangeListener);
         reorderChainedTabs();
+        moveToDock();
     }
 
     public void setListener(@Nullable Listener listener) {

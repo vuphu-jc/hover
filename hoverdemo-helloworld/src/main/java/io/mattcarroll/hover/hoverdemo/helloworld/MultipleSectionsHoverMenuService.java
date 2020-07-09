@@ -83,6 +83,7 @@ public class MultipleSectionsHoverMenuService extends HoverMenuService {
                             new HoverMenuScreen(mContext, "Screen 1")
                     ));
                     notifyMenuChanged();
+                    mHoverView.setSelectedSectionId(new SectionId(String.valueOf(3)));
                 }
             }, 1000);
         }

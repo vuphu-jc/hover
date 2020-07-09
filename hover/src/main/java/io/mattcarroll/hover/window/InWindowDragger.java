@@ -19,7 +19,6 @@ import android.content.Context;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.View;
 
 import io.mattcarroll.hover.Dragger;
@@ -47,7 +46,6 @@ public class InWindowDragger extends DraggerImpl {
 
     @Override
     protected void createTouchControlView(@NonNull final Point dragStartCenterPosition) {
-        // TODO: define dimen size
         mDragView = new View(mContext);
         mWindowViewController.addViewDragger(getTouchAreaDiameter(), getTouchAreaDiameter(), true, mDragView);
         mWindowViewController.moveViewTo(mDragView, dragStartCenterPosition.x - (getTouchAreaDiameter() / 2), dragStartCenterPosition.y - (getTouchAreaDiameter() / 2));
@@ -79,9 +77,7 @@ public class InWindowDragger extends DraggerImpl {
     @Override
     protected void moveDragViewTo(PointF centerPosition) {
         if (mDragView == null) return;
-        Log.d(TAG, "Center position: " + centerPosition);
         PointF cornerPosition = convertCenterToCorner(centerPosition);
-        Log.d(TAG, "Corner position: " + cornerPosition);
         mWindowViewController.moveViewTo(mDragView, (int) cornerPosition.x, (int) cornerPosition.y);
     }
 }
