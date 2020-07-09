@@ -402,9 +402,10 @@ public class HoverView extends RelativeLayout {
         return mWindowViewController;
     }
 
-    public void setSelectedSetionId(HoverMenu.SectionId sectionId) {
+    public void setSelectedSectionId(HoverMenu.SectionId sectionId) {
         if (mMenu.getSection(sectionId) != null && !mSelectedSectionId.equals(sectionId)) {
             mSelectedSectionId = sectionId;
+            saveVisualState();
             mState.onSelectedSectionIdChanged();
         }
     }

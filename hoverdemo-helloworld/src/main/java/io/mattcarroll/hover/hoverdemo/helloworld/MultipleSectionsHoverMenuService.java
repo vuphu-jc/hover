@@ -64,7 +64,7 @@ public class MultipleSectionsHoverMenuService extends HoverMenuService {
             mContext = context.getApplicationContext();
 
             mSections = new ArrayList<>();
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 1; i++) {
                 mSections.add(new Section(
                         new SectionId(String.valueOf(i)),
                         createTabView(),
@@ -83,6 +83,7 @@ public class MultipleSectionsHoverMenuService extends HoverMenuService {
                             new HoverMenuScreen(mContext, "Screen 1")
                     ));
                     notifyMenuChanged();
+                    mHoverView.setSelectedSectionId(new SectionId(String.valueOf(3)));
                 }
             }, 1000);
         }
