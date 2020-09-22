@@ -21,7 +21,6 @@ import android.graphics.PointF;
 import android.support.animation.FlingAnimation;
 import android.support.animation.FloatValueHolder;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
