@@ -21,6 +21,7 @@ import android.graphics.PointF;
 import android.support.animation.FlingAnimation;
 import android.support.animation.FloatValueHolder;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -57,13 +58,14 @@ public class InViewDragger extends DraggerImpl {
 
     @Override
     protected void createTouchControlView(@NonNull Point dragStartCenterPosition) {
+        int touchAreaDiameter = getTouchAreaDiameter();
         mDragView = new View(mContainer.getContext());
-        mDragView.setLayoutParams(new ViewGroup.LayoutParams(getTouchAreaDiameter(), getTouchAreaDiameter()));
+        mDragView.setLayoutParams(new ViewGroup.LayoutParams(touchAreaDiameter, touchAreaDiameter));
         mDragView.setOnTouchListener(getDragTouchListener());
         mDragView.setBackgroundColor(Color.RED);
         mContainer.addView(mDragView);
 
-        moveDragViewTo(new PointF(dragStartCenterPosition.x - getTouchAreaDiameter() / 2f, dragStartCenterPosition.y - getTouchAreaDiameter() / 2f));
+        moveDragViewTo(new PointF(dragStartCenterPosition.x - touchAreaDiameter / 2f, dragStartCenterPosition.y - touchAreaDiameter / 2f));
         updateTouchControlViewAppearance();
     }
 

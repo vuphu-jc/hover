@@ -48,7 +48,6 @@ class HoverViewStateExpanded extends BaseHoverViewState {
     private static final long CREATE_DRAGGER_DELAY_TIME = 500;
     private static final int ANCHOR_TAB_X_OFFSET_IN_PX = 100;
     private static final int ANCHOR_TAB_Y_OFFSET_IN_PX = 100;
-    private static final int TAB_SPACING_IN_PX = 200;
     private static final int TAB_APPEARANCE_DELAY_IN_MS = 100;
 
     private boolean mHasControl = false;
@@ -167,7 +166,7 @@ class HoverViewStateExpanded extends BaseHoverViewState {
 
                 mChainedTabs.add(chainedTab);
                 mSections.put(chainedTab, section);
-                mTabChains.add(new TabChain(chainedTab, TAB_SPACING_IN_PX));
+                mTabChains.add(new TabChain(chainedTab));
 
                 mDraggers.put(chainedTab, mHoverView.createInViewDragger());
                 mDragListeners.put(chainedTab, new FloatingTabDragListener(this, chainedTab));
@@ -467,10 +466,10 @@ class HoverViewStateExpanded extends BaseHoverViewState {
         if (mChainedTabs.size() <= position) {
             // This section was appended to the end.
             mChainedTabs.add(newTab);
-            mTabChains.add(new TabChain(newTab, TAB_SPACING_IN_PX));
+            mTabChains.add(new TabChain(newTab));
         } else {
             mChainedTabs.add(position, newTab);
-            mTabChains.add(position, new TabChain(newTab, TAB_SPACING_IN_PX));
+            mTabChains.add(position, new TabChain(newTab));
         }
 
         newTab.setOnClickListener(new View.OnClickListener() {
@@ -718,13 +717,17 @@ class HoverViewStateExpanded extends BaseHoverViewState {
     }
 
     private void activateDragger(FloatingTab floatingTab) {
-        mDraggers.get(floatingTab)
-                .activate(mDragListeners.get(floatingTab), floatingTab.getPosition());
+        if (mDraggers.containsKey(floatingTab)) {
+            mDraggers.get(floatingTab)
+                    .activate(mDragListeners.get(floatingTab), floatingTab.getPosition());
+        }
     }
 
     private void deactivateDragger(FloatingTab floatingTab) {
-        mDraggers.get(floatingTab)
-                .deactivate();
+        if (mDraggers.containsKey(floatingTab)) {
+            mDraggers.get(floatingTab)
+                    .deactivate();
+        }
     }
 
     // TODO: do we need this?

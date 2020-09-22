@@ -190,7 +190,7 @@ public abstract class DraggerImpl implements Dragger {
             float minValue,
             float maxValue
     ) {
-        return new FlingAnimation(new FloatValueHolder(startValue))
+        return new FlingAnimation(new FloatValueHolder(boundaryValue(startValue, minValue, maxValue)))
                 .setStartVelocity(mScaleVelocity * startVelocity)
                 .setMinValue(minValue)
                 .setMaxValue(maxValue)
@@ -335,6 +335,10 @@ public abstract class DraggerImpl implements Dragger {
         mVelocityTracker.computeCurrentVelocity(400, 8000f);
         mXVelocity = mVelocityTracker.getXVelocity(pointerId);
         mYVelocity = mVelocityTracker.getYVelocity(pointerId);
+    }
+
+    private float boundaryValue(float value, float minValue, float maxValue) {
+        return Math.min(maxValue, Math.max(value, minValue));
     }
 }
 
