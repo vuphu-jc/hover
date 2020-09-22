@@ -185,6 +185,8 @@ class ExitView extends RelativeLayout {
     }
 
     public <T extends View> void releaseExit(final List<T> followers, final Runnable onFinished) {
+        if (mAnimationViewWrapper == null) return;
+
         mAnimationViewWrapper.setOnActionListener(new AnimationViewWrapper.OnActionListener() {
             int mX = (int) mExitIcon.getX();
             int mY = (int) mExitIcon.getY();
