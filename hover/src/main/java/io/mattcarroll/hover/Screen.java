@@ -48,10 +48,6 @@ class Screen {
         mContainer = hoverMenuContainer;
 
         mShadeView = new ShadeView(mContainer.getContext());
-//        mContainer.addView(mShadeView, new WindowManager.LayoutParams(
-//                ViewGroup.LayoutParams.MATCH_PARENT,
-//                ViewGroup.LayoutParams.MATCH_PARENT
-//        ));
         mShadeView.hideImmediate();
 
         mContentDisplay = new ContentDisplay(mContainer.getContext());

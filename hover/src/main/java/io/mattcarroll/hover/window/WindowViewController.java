@@ -51,9 +51,6 @@ public class WindowViewController {
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | touchableFlag,
                 PixelFormat.TRANSLUCENT
         );
-        if (Build.VERSION.SDK_INT >= 21) {
-            params.flags |= WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-        }
 
         params.gravity = Gravity.TOP | Gravity.START;
         params.x = 0;
@@ -79,9 +76,6 @@ public class WindowViewController {
                 PixelFormat.TRANSLUCENT
         );
 
-        if (Build.VERSION.SDK_INT >= 19) {
-            params.flags |= WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-        }
         view.setFitsSystemWindows(true);
         params.softInputMode = WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN | WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE;
         params.gravity = Gravity.TOP | Gravity.START;
