@@ -15,7 +15,7 @@ import io.mattcarroll.hover.Dragger;
 
 public abstract class DraggerImpl implements Dragger {
 
-    private static final String TAG = "InWindowDragger";
+    private static final String TAG = "DraggerImpl";
 
     private final int mTouchAreaDiameter;
     private final float mTapTouchSlop;
@@ -226,7 +226,6 @@ public abstract class DraggerImpl implements Dragger {
         mOriginalViewPosition = getDragViewCenterPosition();
         mCurrentViewPosition = new PointF(mOriginalViewPosition.x, mOriginalViewPosition.y);
         mOriginalTouchPosition.set(motionEvent.getRawX(), motionEvent.getRawY());
-
         mDragListener.onPress(mCurrentViewPosition.x, mCurrentViewPosition.y);
     }
 
