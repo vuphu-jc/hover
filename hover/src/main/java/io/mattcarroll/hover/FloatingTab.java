@@ -48,6 +48,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 class FloatingTab extends FrameLayout {
 
     private static final String TAG = "FloatingTab";
+    private static final int DELAY_TIME_FOR_ANIMATION_END = 100;
 
     private final String mId;
     private int mTabSize;
@@ -259,7 +260,12 @@ class FloatingTab extends FrameLayout {
                 if (null != onDocked) {
                     onDocked.run();
                 }
-                notifyListenersOfPositionChange();
+                mTabView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        notifyListenersOfPositionChange();
+                    }
+                }, DELAY_TIME_FOR_ANIMATION_END);
             }
 
             @Override
