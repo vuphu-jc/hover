@@ -17,7 +17,6 @@ package io.mattcarroll.hover.hoverdemo.helloworld;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -45,9 +44,9 @@ public class MultipleSectionsHoverMenuService extends HoverMenuService {
 
     @Override
     protected void onHoverMenuLaunched(@NonNull Intent intent, @NonNull HoverView hoverView) {
+        mHoverView = hoverView;
         hoverView.setMenu(createHoverMenu());
         hoverView.collapse();
-        mHoverView = hoverView;
     }
 
     @NonNull
@@ -64,37 +63,22 @@ public class MultipleSectionsHoverMenuService extends HoverMenuService {
             mContext = context.getApplicationContext();
 
             mSections = new ArrayList<>();
-            for (int i = 0; i < 1; i++) {
+            for (int i = 0; i < mHoverView.getMaxNumberOfTabs(); i++) {
                 mSections.add(new Section(
                         new SectionId(String.valueOf(i)),
-                        createTabView(),
+                        createTabView(1 + i),
                         new HoverMenuScreen(mContext, "Screen 1")
                 ));
             }
 
-            notifyMenuChanged();
 
-            (new Handler()).postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    mSections.add(new Section(
-                            new SectionId(String.valueOf(3)),
-                            createTabView(),
-                            new HoverMenuScreen(mContext, "Screen 1")
-                    ));
-                    notifyMenuChanged();
-                    mHoverView.setSelectedSectionId(new SectionId(String.valueOf(3)));
-                }
-            }, 1000);
+            notifyMenuChanged();
         }
 
-        int mCounter = 0;
-
-        private View createTabView() {
-            mCounter++;
+        private View createTabView(int index) {
             ImageView imageView = new ImageView(mContext);
             imageView.setImageResource(R.drawable.tab_background);
-            if (mCounter % 2 == 0) {
+            if (index % 2 == 0) {
                 imageView.setImageResource(R.drawable.tab_background_blue);
             }
             return imageView;

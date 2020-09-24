@@ -53,7 +53,7 @@ class TabChain {
 
     TabChain(@NonNull FloatingTab tab) {
         mTab = tab;
-        mTabSpacingInPx = mTab.getTabSize() + (int) tab.getResources().getDimension(R.dimen.hover_tab_chain_distance);
+        mTabSpacingInPx = mTab.getTabSize() + (int) tab.getResources().getDimension(R.dimen.hover_tab_margin);
     }
 
     @NonNull
