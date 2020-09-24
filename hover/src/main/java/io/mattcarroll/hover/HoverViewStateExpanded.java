@@ -104,10 +104,10 @@ class HoverViewStateExpanded extends BaseHoverViewState {
         mHoverView.requestFocus(); // For handling hardware back button presses.
 
         int tabSize = mHoverView.getResources().getDimensionPixelSize(R.dimen.hover_tab_size);
-        int distanceSize = mHoverView.getResources().getDimensionPixelSize(R.dimen.hover_tab_chain_distance);
+        int tabMargin = mHoverView.getResources().getDimensionPixelSize(R.dimen.hover_tab_margin);
         mDock = new Point(
-                mHoverView.mScreen.getWidth() - tabSize / 2 - distanceSize,
-                tabSize / 2 + distanceSize
+                mHoverView.mScreen.getWidth() - tabSize / 2 - tabMargin,
+                tabSize / 2 + tabMargin
         );
         if (null != mHoverView.mMenu) {
             Log.d(TAG, "Already has menu. Expanding.");

@@ -222,6 +222,13 @@ public class HoverView extends RelativeLayout {
         visualState.restore(this);
     }
 
+    public int getMaxNumberOfTabs() {
+        float tabSize = getResources().getDimension(R.dimen.hover_tab_size);
+        float tabMargin = getResources().getDimension(R.dimen.hover_tab_margin);
+        int screenWidth = getScreenSize().x;
+        return (int) Math.floor(screenWidth / (tabSize + tabMargin));
+    }
+
     public void saveVisualState() {
         if (null == mMenu) {
             // Nothing to save.
