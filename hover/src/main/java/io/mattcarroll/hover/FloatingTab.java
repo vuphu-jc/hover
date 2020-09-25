@@ -257,12 +257,14 @@ class FloatingTab extends FrameLayout {
                 if (null != onDocked) {
                     onDocked.run();
                 }
-                mTabView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        notifyListenersOfPositionChange();
-                    }
-                }, DELAY_TIME_FOR_ANIMATION_END);
+                if (mTabView != null) {
+                    mTabView.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            notifyListenersOfPositionChange();
+                        }
+                    }, DELAY_TIME_FOR_ANIMATION_END);
+                }
             }
 
             @Override
